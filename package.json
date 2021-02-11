@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta1",
-    "vue": "^2.6.11"
+    "lodash": "^4.17.20",
+    "vue": "^2.6.11",
+    "vue-good-table": "^2.21.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

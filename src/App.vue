@@ -9,25 +9,49 @@
                 :setClanTag="setClanTag"
             />
         </div>
+
+        <div class="m-5">
+            <ClanHeaderCard
+                class="w-50"
+                :clanScore="clanScore"
+                :clanWarTrophies="clanWarTrophies"
+                :currentMemberCount="currentMemberCount"
+                :name="name"
+                :tag="tag"
+            />
+
+            <RiverRaceTable
+                class="mt-5"
+                :memberList="memberList"
+                :riverRaceLog="riverRaceLog"
+                :tag="tag"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import ClanHeaderCard from "@/components/ClanHeaderCard";
 import ClanTagInput from "@/components/ClanTagInput";
 import Navbar from "@/components/Navbar";
+import RiverRaceTable from "@/components/RiverRaceTable";
 
 import { getClanRiverRaceData } from "@/services/ClashRoyaleAPI";
 
 export default {
     name: "App",
+
     components: {
+        ClanHeaderCard,
         ClanTagInput,
-        Navbar
+        Navbar,
+        RiverRaceTable
     },
+
     data() {
         return {
-            clanScore: "",
-            clanWarTrophies: "",
+            clanScore: 0,
+            clanWarTrophies: 0,
             clanTag: "Y2CG2UYL",
             memberList: [],
             name: "",
@@ -35,6 +59,13 @@ export default {
             tag: ""
         };
     },
+
+    computed: {
+        currentMemberCount() {
+            return this.memberList.length;
+        }
+    },
+
     methods: {
         async fetchClanRiverRaceData() {
             const {
@@ -53,6 +84,7 @@ export default {
             this.clanTag = target.value;
         }
     },
+
     mounted() {
         // TODO: temporary, will persist somehow
         if (!this.memberList.length) {
@@ -67,6 +99,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 }
 </style>
