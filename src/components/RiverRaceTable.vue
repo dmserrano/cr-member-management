@@ -175,6 +175,13 @@ export default {
     },
 
     watch: {
+        tag(currentTag, previousTag) {
+            if (currentTag !== previousTag) {
+                this.flattenedStandings = [];
+                this.currentSeasonMap = {};
+            }
+        },
+
         riverRaceLog() {
             this.refreshTable();
         },
