@@ -31,7 +31,8 @@ const defaultColumns = [
     {
         label: "Player",
         field: "name",
-        tdClass: "fw-bold"
+        tdClass: "fw-bold",
+        type: "string"
     },
     {
         label: "Role",
