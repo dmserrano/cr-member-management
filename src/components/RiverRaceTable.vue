@@ -1,16 +1,18 @@
 <template>
     <div>
-        <MemberFilterForm
-            class="w-50 mb-5"
-            :minContribution="memberFilters.minContribution"
-            :targetContribution="memberFilters.targetContribution"
-            :updateMemberFilters="updateMemberFilters"
-        />
+        <div class="row">
+            <MemberFilterForm
+                class="col-lg-6 col-md-5 mb-5"
+                :minContribution="memberFilters.minContribution"
+                :targetContribution="memberFilters.targetContribution"
+                :updateMemberFilters="updateMemberFilters"
+            />
 
-        <VueGoodTable
-            :columns="columns"
-            :rows="memberList"
-        />
+            <VueGoodTable
+                :columns="columns"
+                :rows="memberList"
+            />
+        </div>
     </div>
 </template>
 
@@ -56,8 +58,8 @@ export default {
             currentSeasonMap: {},
             flattenedStandings: [],
             memberFilters: {
-                minContribution: "0",
-                targetContribution: "2000"
+                minContribution: "",
+                targetContribution: ""
             },
         };
     },

@@ -19,7 +19,7 @@
                         class="form-control"
                         id="min-contribution"
                         name="minContribution"
-                        placeholder="0"
+                        placeholder="0 fame + repairs"
                         :value="minContribution"
                         @blur="updateMemberFilters"
                     >
@@ -38,7 +38,7 @@
                         type="number"
                         class="form-control"
                         id="target-contribution"
-                        placeholder="2000"
+                        placeholder="2000 fame + repairs"
                         name="targetContribution"
                         :value="targetContribution"
                         @blur="updateMemberFilters"

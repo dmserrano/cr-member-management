@@ -2,17 +2,30 @@
     <div id="app">
         <Navbar />
 
-        <div class="w-25 m-5">
-            <ClanTagInput
-                :clanTag="clanTag"
-                :fetchClanRiverRaceData="fetchClanRiverRaceData"
-                :setClanTag="setClanTag"
-            />
+        <div class="row mx-5">
+            <div class="col-md-8 mt-5">
+                <h2>Clan Wars Member Management</h2>
+
+                <div class="">
+                    <p>View weekly contributions for Clan Wars to more accurately determine which members have been more or less involved.</p>
+
+                    <p>Start by entering your clan tag to view members weekly contributions. After that, you can add filters to view which members have met a specific contribution goal or not.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-5">
+                <ClanTagInput
+                    :clanTag="clanTag"
+                    :fetchClanRiverRaceData="fetchClanRiverRaceData"
+                    :isLoading="isLoading"
+                    :setClanTag="setClanTag"
+                />
+            </div>
         </div>
 
-        <div class="m-5">
+        <div class="row m-5" v-if="name">
             <ClanHeaderCard
-                class="w-50"
+                class="col-lg-6 col-md-12"
                 :clanScore="clanScore"
                 :clanWarTrophies="clanWarTrophies"
                 :currentMemberCount="currentMemberCount"
@@ -21,7 +34,7 @@
             />
 
             <RiverRaceTable
-                class="mt-5"
+                class="col-md-12 mt-5"
                 :memberList="memberList"
                 :riverRaceLog="riverRaceLog"
                 :tag="tag"
@@ -52,7 +65,8 @@ export default {
         return {
             clanScore: 0,
             clanWarTrophies: 0,
-            clanTag: "Y2CG2UYL",
+            clanTag: "",
+            isLoading: false,
             memberList: [],
             name: "",
             riverRaceLog: [],
@@ -68,10 +82,13 @@ export default {
 
     methods: {
         async fetchClanRiverRaceData() {
+            this.isLoading = true;
+
             const {
                 memberList, riverRaceLog, ...clanData
             } = await getClanRiverRaceData(this.clanTag);
 
+            this.isLoading = false;
             this.clanScore = clanData.clanScore;
             this.clanWarTrophies = clanData.clanWarTrophies;
             this.memberList = memberList;
@@ -84,13 +101,6 @@ export default {
             this.clanTag = target.value;
         }
     },
-
-    mounted() {
-        // TODO: temporary, will persist somehow
-        if (!this.memberList.length) {
-            this.fetchClanRiverRaceData();
-        }
-    }
 };
 </script>
 
